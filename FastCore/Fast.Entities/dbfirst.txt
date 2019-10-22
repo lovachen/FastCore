@@ -1,0 +1,1 @@
+﻿ Scaffold-DbContext "data source=127.0.0.1;initial catalog=FastCore;user id=sa;password=123456;" Microsoft.EntityFrameworkCore.SqlServer -Context FastDbContext -DataAnnotations -Force -Project Fast.Entities  -UseDatabaseNames
