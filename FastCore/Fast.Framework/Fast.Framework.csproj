@@ -4,4 +4,17 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="3.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fast.Core\Fast.Core.csproj" />
+    <ProjectReference Include="..\Fast.Entities\Fast.Entities.csproj" />
+    <ProjectReference Include="..\Fast.Mapping\Fast.Mapping.csproj" />
+    <ProjectReference Include="..\Fast.Services\Fast.Services.csproj" />
+  </ItemGroup>
+
 </Project>
