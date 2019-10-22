@@ -130,7 +130,7 @@ namespace Fast.Services
             }
             else
             {
-                _dbContext.Database.ExecuteSqlCommand("DELETE FROM [Sys_Setting]");
+                _dbContext.Database.ExecuteSqlRaw("DELETE FROM [Sys_Setting]");
             }
         }
     }

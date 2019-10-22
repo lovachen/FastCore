@@ -16,10 +16,10 @@ namespace Fast.Services.Setting
         private const string MARK_LOGO = "ab.services.marklogo";
         private const string IMG_404="ab.services.404.img";
         private ICacheManager _cacheManager;
-        private IHostingEnvironment _env;
+        private IWebHostEnvironment _env;
 
         public MarkLogoService(ICacheManager cacheManager,
-            IHostingEnvironment env)
+            IWebHostEnvironment env)
         {
             _env = env;
             _cacheManager = cacheManager;

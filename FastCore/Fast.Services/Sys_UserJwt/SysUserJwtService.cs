@@ -47,7 +47,7 @@ namespace Fast.Services
         /// <param name="jti"></param>
         public void SignOut(string jti)
         {
-            _dbContext.Database.ExecuteSqlCommand($"DELETE FROM [Sys_UserJwt] WHERE [Jti]={jti}");
+            _dbContext.Database.ExecuteSqlRaw($"DELETE FROM [Sys_UserJwt] WHERE [Jti]={jti}");
             RemoveCahce(jti);
         }
 

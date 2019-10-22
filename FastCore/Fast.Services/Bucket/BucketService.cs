@@ -115,7 +115,7 @@ namespace Fast.Services
         {
             if (_dbContext.BucketImage.Any(o => o.BucketId == id))
                 return Fail("已使用，不能删除");
-            _dbContext.Database.ExecuteSqlCommand($"DELETE FROM [Bucket] WHERE [Id]={id}");
+            _dbContext.Database.ExecuteSqlRaw($"DELETE FROM [Bucket] WHERE [Id]={id}");
             _cacheManager.Remove(MODEL_KEY);
             return Success("删除成功");
         }

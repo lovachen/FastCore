@@ -118,7 +118,7 @@ namespace Fast.Services
             {
                 using (var trans = _dbContext.Database.BeginTransaction())
                 {
-                    _dbContext.Database.ExecuteSqlCommand($"DELETE FROM [Sys_UserRole] WHERE [UserId]={userId}");
+                    _dbContext.Database.ExecuteSqlRaw($"DELETE FROM [Sys_UserRole] WHERE [UserId]={userId}");
                     if (roleIds != null && roleIds.Any())
                         roleIds.ForEach(roleId =>
                         {
@@ -232,8 +232,8 @@ namespace Fast.Services
                     if (item == null) return Fail("角色不存在");
                     string oldLog = JsonConvert.SerializeObject(item);
 
-                    _dbContext.Database.ExecuteSqlCommand($"DELETE FROM [Sys_Permission] WHERE [RoleId]={item.Id}");
-                    _dbContext.Database.ExecuteSqlCommand($"DELETE FROM [Sys_UserRole] WHERE [RoleId]={item.Id}");
+                    _dbContext.Database.ExecuteSqlRaw($"DELETE FROM [Sys_Permission] WHERE [RoleId]={item.Id}");
+                    _dbContext.Database.ExecuteSqlRaw($"DELETE FROM [Sys_UserRole] WHERE [RoleId]={item.Id}");
 
                     _dbContext.Sys_Role.Remove(item);
                     _dbContext.SaveChanges();
@@ -283,7 +283,7 @@ namespace Fast.Services
                 }
                 using (var trans = _dbContext.Database.BeginTransaction())
                 {
-                    _dbContext.Database.ExecuteSqlCommand($"DELETE FROM [Sys_Permission] WHERE [RoleId]={roleId}");
+                    _dbContext.Database.ExecuteSqlRaw($"DELETE FROM [Sys_Permission] WHERE [RoleId]={roleId}");
                     categoryIds.ForEach(id =>
                     {
                         _dbContext.Sys_Permission.Add(new Sys_Permission()

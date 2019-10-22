@@ -54,7 +54,7 @@ namespace Fast.Services
                     var item = sysCategories.FirstOrDefault(o => o.UID == del.UID);
                     if (item == null)
                     {
-                        _dbContext.Database.ExecuteSqlCommand($"DELETE FROM [Sys_Permission] WHERE [CategoryId]={del.Id}");
+                        _dbContext.Database.ExecuteSqlRaw($"DELETE FROM [Sys_Permission] WHERE [CategoryId]={del.Id}");
                         _dbContext.Sys_Category.Remove(del);
                     }
                 });

@@ -20,8 +20,7 @@ using System.Text.Unicode;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Fast.Framework.Security;
 using Microsoft.AspNetCore.Builder;
-using cts.web.core.Librs;
-using AutoMapper.Configuration;
+using cts.web.core.Librs; 
 
 namespace Fast.Framework
 {

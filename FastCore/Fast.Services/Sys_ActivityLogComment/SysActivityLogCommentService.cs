@@ -75,7 +75,7 @@ namespace Fast.Services
         /// <param name="value"></param>
         public void Update(string name,string value)
         {
-            _dbContext.Database.ExecuteSqlCommand($"UPDATE [Sys_ActivityLogComment] SET [Comment]={value} WHERE [EntityName]={name}");
+            _dbContext.Database.ExecuteSqlRaw($"UPDATE [Sys_ActivityLogComment] SET [Comment]={value} WHERE [EntityName]={name}");
         }
 
     }

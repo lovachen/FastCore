@@ -50,8 +50,8 @@ namespace Fast.Services
                     return (null, null);
                 //删除原有记录再新增
                 string r = EncryptorHelper.GetMD5(Guid.NewGuid().ToString());
-                _dbContext.Database.ExecuteSqlCommand($"DELETE FROM [Sys_UserR] WHERE [UserId]={user.Id} AND [Platform]={platform};");
-                _dbContext.Database.ExecuteSqlCommand($"INSERT INTO [Sys_UserR]([Id],[UserId],[R],[Platform])VALUES({CombGuid.NewGuid()},{user.Id},{r},{platform});");
+                _dbContext.Database.ExecuteSqlRaw($"DELETE FROM [Sys_UserR] WHERE [UserId]={user.Id} AND [Platform]={platform};");
+                _dbContext.Database.ExecuteSqlRaw($"INSERT INTO [Sys_UserR]([Id],[UserId],[R],[Platform])VALUES({CombGuid.NewGuid()},{user.Id},{r},{platform});");
                 trans.Commit();
                 return (user.Salt, r);
             }

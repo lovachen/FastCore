@@ -9,11 +9,11 @@ namespace Fast.Services
 {
     public class InstallService 
     {
-        private IHostingEnvironment _environment;
+        private IWebHostEnvironment _environment;
         private SysCategoryService _sysCategoryService;
         private SettingService _settingService;
 
-        public InstallService(IHostingEnvironment environment,
+        public InstallService(IWebHostEnvironment environment,
             SysCategoryService sysCategoryService,
             SettingService settingService)
         {
