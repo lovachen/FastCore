@@ -24,7 +24,7 @@ using cts.web.core.Librs;
 
 namespace Fast.Framework
 {
-    public class AbEngine : Engine, IEngine
+    public class FastEngine : Engine, IEngine
     {
         private readonly IWebHostEnvironment _hosting;
 
@@ -32,7 +32,7 @@ namespace Fast.Framework
         /// 
         /// </summary>
         /// <param name="configuration"></param>
-        public AbEngine(IConfiguration configuration, IWebHostEnvironment hosting) : base(configuration)
+        public FastEngine(IConfiguration configuration, IWebHostEnvironment hosting) : base(configuration)
         {
             _hosting = hosting;
         }

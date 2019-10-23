@@ -2,28 +2,39 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using cts.web.core;
+using Fast.Framework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NLog;
+using NLog.Targets;
 
 namespace Fast.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration,
+            IWebHostEnvironment webHostEnvironment)
         {
+            Hosting = webHostEnvironment;
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Hosting { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            var engine = EngineContext.Create(new FastEngine(Configuration, Hosting));
+            engine.Initialize(services);
+            var serviceProvider = engine.ConfigureServices(services);
+
+            return serviceProvider;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +56,10 @@ namespace Fast.Web
             app.UseRouting();
 
             app.UseAuthorization();
+
+            //NLog 数据库连接
+            LogManager.Configuration.FindTargetByName<DatabaseTarget>("connectionString").ConnectionString 
+                = Configuration.GetConnectionString("DefaultConnection");
 
             app.UseEndpoints(endpoints =>
             {
