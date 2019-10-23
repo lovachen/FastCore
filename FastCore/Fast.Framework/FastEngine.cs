@@ -19,7 +19,11 @@ using System.Text.Unicode;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Fast.Framework.Security;
 using Microsoft.AspNetCore.Builder;
-using cts.web.core.Librs; 
+using cts.web.core.Librs;
+using Fast.Services;
+using Quartz;
+using Quartz.Spi;
+using Quartz.Impl;
 
 namespace Fast.Framework
 {
@@ -107,6 +111,13 @@ namespace Fast.Framework
 
             //路由url小写
             services.AddRouting(options => options.LowercaseUrls = true);
+
+            //定时任务调度
+            services.AddTransient<CustomJob>();
+            services.AddTransient<JobCenter>();
+            services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+            services.AddSingleton<IJobFactory, IOCJobFactory>();
+            services.AddScoped<QuartzStartup>();
         }
     }
 }

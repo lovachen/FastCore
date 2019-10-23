@@ -13,16 +13,16 @@ namespace Fast.Framework.Filters
 {
     public class WebExceptionAttribute : TypeFilterAttribute
     {
-        int _platform;
-        string _pageDir;
+        private int _platform;
+       
         /// <summary>
         /// 
         /// </summary>
-        public WebExceptionAttribute(int platform = 0, string pageDir = "/admin") : base(typeof(ApiExceptionFilter))
+        /// <param name="platform">0:网页，1：api</param>
+        public WebExceptionAttribute(int platform = 0) : base(typeof(ApiExceptionFilter))
         {
             _platform = platform;
-            _pageDir = pageDir;
-            Arguments = new object[] { platform , pageDir };
+            Arguments = new object[] { platform  };
         }
 
         private class ApiExceptionFilter : IExceptionFilter
@@ -30,20 +30,17 @@ namespace Fast.Framework.Filters
             private ILogger<ApiExceptionFilter> _logger;
             private IMailProvide _mailProvide;
             private SettingService _settingService;
-            int _platform;
-            string _pageDir;
+            int _platform; 
 
             public ApiExceptionFilter(ILogger<ApiExceptionFilter> logger,
                 IMailProvide mailProvide,
                 SettingService settingService,
-                int platform = 0,
-                string pageDir = "/admin")
+                int platform = 0)
             {
                 _logger = logger;
                 _mailProvide = mailProvide;
                 _settingService = settingService;
-                _platform = platform;
-            _pageDir = pageDir;
+                _platform = platform; 
             }
 
             /// <summary>
@@ -79,6 +76,7 @@ namespace Fast.Framework.Filters
                 }
                 switch (_platform)
                 {
+                    //web页面
                     case 0:
                         if (context.HttpContext.Request.IsAjaxRequest())
                         {
@@ -86,9 +84,10 @@ namespace Fast.Framework.Filters
                         }
                         else
                         {
-                            context.Result = new RedirectToPageResult($"{_pageDir}/error");
+                            context.Result = new ViewResult() { ViewName ="Error" };
                         }
                         break;
+                    //api
                     case 1:
                         context.Result = new OkObjectResult(new ApiJsonResult() { code = 1001, msg = "系统错误，请稍后重试" });
                         break;
