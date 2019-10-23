@@ -46,7 +46,8 @@ namespace Fast.Framework
         /// <param name="services"></param>
         public override void Initialize(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation(); //页面动态编译，发布时应该移除
 
             //services.AddDbContextPool<ABDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")),100);
             services.AddDbContext<FastDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));

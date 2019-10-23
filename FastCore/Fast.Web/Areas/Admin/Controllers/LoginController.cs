@@ -12,7 +12,7 @@ namespace Fast.Web.Areas.Admin.Controllers
     /// 
     /// </summary>
 
-    public class LoginController : WebBaseController
+    public class LoginController : AdminController
     {
 
 
