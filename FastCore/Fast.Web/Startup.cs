@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
 using cts.web.core;
 using Fast.Framework;
+using Fast.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,17 +30,15 @@ namespace Fast.Web
         public IWebHostEnvironment Hosting { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
-            var engine = EngineContext.Create(new FastEngine(Configuration, Hosting));
-            engine.Initialize(services);
-            var serviceProvider = engine.ConfigureServices(services);
-
-            return serviceProvider;
+            new FastEngine(Configuration, Hosting).Initialize(services);
+            //engine.Initialize(services); 
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+         
+            // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+            InstallService installService)
         {
             if (env.IsDevelopment())
             {
@@ -58,7 +58,7 @@ namespace Fast.Web
             app.UseAuthorization();
 
             //NLog 数据库连接
-            LogManager.Configuration.FindTargetByName<DatabaseTarget>("connectionString").ConnectionString 
+            LogManager.Configuration.FindTargetByName<DatabaseTarget>("database").ConnectionString 
                 = Configuration.GetConnectionString("DefaultConnection");
 
             app.UseEndpoints(endpoints =>
@@ -67,6 +67,11 @@ namespace Fast.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //初始化系统菜单，及参数
+            installService.Install();
+             
+
         }
     }
 }

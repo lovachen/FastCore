@@ -4,8 +4,7 @@ using cts.web.core.MediaItem;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Mvc; 
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using cts.web.core.Model;
@@ -43,8 +42,7 @@ namespace Fast.Framework
         /// <param name="services"></param>
         public override void Initialize(IServiceCollection services)
         {
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddControllersWithViews();
 
             //services.AddDbContextPool<ABDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")),100);
             services.AddDbContext<FastDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -77,17 +75,17 @@ namespace Fast.Framework
             //启用redis或者内存缓存,默认使用内存缓存
             services.AddRedisOrMemoryCache(Configuration);
             //
-            var cfg = new MapperConfiguration(cfg=>cfg.AddProfile<MappingProfile>());
-            cfg.AssertConfigurationIsValid();
-            services.AddAutoMapper(RuntimeHelper.GetAssemblyByName("Fast.Entities"), RuntimeHelper.GetAssemblyByName("Fast.Mapping"));
-
+            //var cfg = new MapperConfiguration(cfg=>cfg.AddProfile<MappingProfile>());
+            // cfg.AssertConfigurationIsValid();
+            //services.AddAutoMapper(RuntimeHelper.GetAssemblyByName("Fast.Entities"), RuntimeHelper.GetAssemblyByName("Fast.Mapping"));
+            services.AddAutoMapper(typeof(MappingProfile));
 
             //启用JWT
             services.AddJwt(_hosting);
 
             //API版本
             services.AddApiVersioning(opts =>
-            {
+            { 
                 opts.AssumeDefaultVersionWhenUnspecified = true;
             });
 
