@@ -49,6 +49,9 @@ namespace Fast.Mapping
             CreateMap<Entities.Sys_UserRole, Sys_UserRoleMapping>();
             CreateMap<Sys_UserRoleMapping, Entities.Sys_UserRole>();
 
+            CreateMap<Entities.QuarztSchedule, QuarztScheduleMapping>();
+            CreateMap<QuarztScheduleMapping, Entities.QuarztSchedule>();
+
         }
     }
 

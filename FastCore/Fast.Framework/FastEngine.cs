@@ -105,6 +105,8 @@ namespace Fast.Framework
                     opts.LoginPath = "/admin";
                 });
 
+            //路由url小写
+            services.AddRouting(options => options.LowercaseUrls = true);
         }
     }
 }

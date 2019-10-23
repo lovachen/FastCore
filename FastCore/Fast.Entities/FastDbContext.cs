@@ -30,6 +30,7 @@ namespace Fast.Entities
         public virtual DbSet<Sys_UserLogin> Sys_UserLogin { get; set; }
         public virtual DbSet<Sys_UserR> Sys_UserR { get; set; }
         public virtual DbSet<Sys_UserRole> Sys_UserRole { get; set; }
+        public virtual DbSet<QuarztSchedule> QuarztSchedule { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
