@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Fast.Core\Fast.Core.csproj" />
     <ProjectReference Include="..\Fast.Entities\Fast.Entities.csproj" />
     <ProjectReference Include="..\Fast.Mapping\Fast.Mapping.csproj" />

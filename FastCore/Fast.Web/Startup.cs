@@ -35,10 +35,10 @@ namespace Fast.Web
             new FastEngine(Configuration, Hosting).Initialize(services);
             //engine.Initialize(services); 
         }
-         
-            // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-            public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
-            InstallService installService)
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+        InstallService installService)
         {
             if (env.IsDevelopment())
             {
@@ -58,7 +58,7 @@ namespace Fast.Web
             app.UseAuthorization();
 
             //NLog 数据库连接
-            LogManager.Configuration.FindTargetByName<DatabaseTarget>("database").ConnectionString 
+            LogManager.Configuration.FindTargetByName<DatabaseTarget>("db").ConnectionString
                 = Configuration.GetConnectionString("DefaultConnection");
 
             app.UseEndpoints(endpoints =>
@@ -70,7 +70,7 @@ namespace Fast.Web
 
             //初始化系统菜单，及参数
             installService.Install();
-             
+
 
         }
     }

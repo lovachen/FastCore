@@ -20,6 +20,7 @@ namespace Fast.Web.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogError("LogError");
             return View();
         }
 
