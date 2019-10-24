@@ -54,5 +54,33 @@ namespace Fast.Mapping
         /// 
         /// </summary>
         public string MobilePhone { get; set; }
+
+
+
+
+        #region 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string CreationTimeForamt => CreationTime.ToString("F");
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string LastActivityTimeForamt => LastActivityTime?.ToString("F");
+
+        /// <summary>
+        /// 角色
+        /// </summary>
+        public List<Sys_RoleMapping> SysRoles { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<Sys_UserRoleMapping> UserRoles { get; set; }
+
+        #endregion
+
     }
 }

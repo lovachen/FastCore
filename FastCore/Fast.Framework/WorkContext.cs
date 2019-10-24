@@ -102,10 +102,22 @@ namespace Fast.Framework
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public bool IsPermit(string path)
+        public bool AuthorityCheck(string routeNameOrPath)
         {
             var categories = GetMyCategories(0);
-            return categories != null && categories.Any(o => o.RouteTemplate.Equals(path, StringComparison.InvariantCultureIgnoreCase));
+            return categories != null && categories.Any(o => o.RouteName.Equals(routeNameOrPath, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        /// <summary>
+        /// 权限检测
+        /// </summary>
+        /// <param name="routeName"></param>
+        /// <returns></returns>
+        public bool AuthorityCheck(string action, string controller)
+        {
+            var categories = GetMyCategories(0);
+            return categories != null && categories.Any(o => o.Action.Equals(action, StringComparison.InvariantCultureIgnoreCase)
+            && o.Controller.Equals(controller, StringComparison.InvariantCultureIgnoreCase));
         }
 
     }

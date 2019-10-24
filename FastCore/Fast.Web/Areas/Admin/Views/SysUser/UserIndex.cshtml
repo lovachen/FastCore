@@ -1,0 +1,253 @@
+﻿
+@{
+    ViewData["Title"] = "系统用户";
+    var canEdit = WorkContext.AuthorityCheck("userEdit");
+    var canSetRole = WorkContext.AuthorityCheck("userRoles");
+    var canSetAttr = WorkContext.AuthorityCheck("userAttrs");
+    var canDel = WorkContext.AuthorityCheck("userDelete");
+}
+<style>
+    .table {
+        min-width: 1000px;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        用户列表
+        <small>系统后台用户</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/admin/home"><i class="fa fa-dashboard"></i> 主界面</a></li>
+        <li class="active">用户列表</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="box box-solid">
+        <div class="box-body no-padding">
+            @if (canEdit)
+            {
+                <button type="button" data-url="@Url.RouteUrl("userEdit")" class="btn bg-maroon margin btnAdd"><i class="fa fa-plus"></i> 新增</button>
+            }
+        </div>
+    </div>
+    <div class="box box-info">
+        <div class="box-body">
+            <form class="form-inline" onsubmit="return false" id="formSearch">
+                <div class="form-group">
+                    <label for="q">关键字</label>
+                    <input type="text" class="form-control" id="q" name="q" placeholder="账号、姓名、手机号">
+                </div>
+                <div class="form-group">
+                    <label for="rid">角色</label>
+
+                    @await Component.InvokeAsync("Roles")
+                </div>
+                <button type="submit" class="btn bg-purple"><i class="fa fa-search"></i> 查询</button>
+            </form>
+        </div>
+    </div>
+    <div class="box box-solid">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="example1" class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th width="10%">姓名</th>
+                        <th width="20%">角色</th>
+                        <th width="20%">分部</th>
+                        <th width="10%">启用</th>
+                        <th width="10%">登陆锁</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th width="10%">姓名</th>
+                        <th width="20%">角色</th>
+                        <th width="20%">分部</th>
+                        <th width="10%">启用</th>
+                        <th width="10%">登陆锁</th>
+                        <th>操作</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+
+</section>
+<!-- page script -->
+<script>
+
+
+    $(function () {
+        // "orderable": false
+        var table = $('#example1').DataTable({
+            language: { url: '/dataTables/chinese.json' },
+            serverSide: true,
+            processing: true,
+            searching: false,
+            scrollX: true,
+            ajax: {
+                url: '@Url.RouteUrl("userData")',
+                data: function (d) {
+                    d.q = $('#q').val();
+                    d.roleid = $('#roleid').val();
+                }
+            },
+            order: [0, 'asc'],
+            columns: [
+                { data: 'Name' },
+                {
+                    data: null,
+                    "orderable": false,
+                    'render': function (data, type, row) {
+                        if (row.SysRoles != null && Array.isArray(row.SysRoles) && row.SysRoles.length>0) {
+                            return row.SysRoles.map(item => {
+                                return '<span class="label label-lg label-primary">' + item.Name +'</span>';
+                            }).join(' ');
+                        }
+                        return '';
+                    }
+                },
+                {
+                    data: null,
+                    "orderable": false,
+                    'render': function (data, type, row) {
+                        if (row.EstateAttributes != null && Array.isArray(row.EstateAttributes) && row.EstateAttributes.length > 0) {
+                            return row.EstateAttributes.map(item => {
+                                return '<span class="label label-lg label-success">' + item.Name + '</span>';
+                            }).join(' ');
+                        }
+                        return '';
+                    }
+                },
+                {
+                    data: null,
+                    "orderable": false,
+                    'render': function (data, type, row) {
+                        return row.Enabled ? '是' :'<span class="label label-danger">禁用</span>';
+                    }
+                },
+                {
+                    data: null,
+                    "orderable": false,
+                    'render': function (data, type, row) {
+                        return row.LoginLock ? '<span class="label label-warning">是</span>' :'正常';
+                    }
+                },
+            ],
+            columnDefs: [
+                { "width": '15%', "targets": [0] },
+            {
+                "targets": 5,//操作按钮目标列
+                "data": null,
+                "render": function (data, type, row) {
+                    var id = row.Id;
+                    var html = "<button data-url='@Url.RouteUrl("userDetails")?id=" + id + "' class='btn btn-link btn-xs btnDetails'><i class='fa fa-search-plus'></i> 查看</button>";
+                    if (@Json.Serialize(canSetAttr)) {
+                        html += "<button data-url='@Url.RouteUrl("userAttrs")?id=" + id + "' class='btn btn-link btn-xs btnEdit' ><i class='fa fa-pencil'></i> 配置分部</button>";
+                    }
+                    if (@Json.Serialize(canSetRole)) {
+                        html += "<button data-url='@Url.RouteUrl("userRoles")?id=" + id + "' class='btn btn-link btn-xs btnSetRoles'><i class='fa fa-gear'></i> 配置角色</button>";
+                    }
+                    if (@Json.Serialize(canDel)) {
+                        html += "<button data-url='@Url.RouteUrl("userDelete")?id=" + id + "' class='btn btn-danger btn-xs btnDelete'><i class='fa fa-times'></i> 删除</button>";
+                    }
+                    return html;
+                }
+            }],
+            "rowCallback": function (row, data) {
+                $(row).find('.btnDetails').click(function (e) {
+                    var _url = $(this).data('url');
+                    var load = layer.load(2);
+                    $.get(_url, function (html) {
+                        layer.close(load);
+                        layer.open({
+                            type: 1,
+                            maxmin: true,
+                            area: ['80%', '80%'],
+                            title: "预览用户详情",
+                            content: html
+                        });
+                    });
+                });
+                $(row).find('.btnEdit').click(function (e) {
+                    e.preventDefault();
+                    var _url = $(this).data('url');
+                    events.edit(_url);
+                });
+                $(row).find('.btnSetRoles').click(function (e) {
+                    e.preventDefault();
+                    var _url = $(this).data('url');
+                    var load = layer.load(2);
+                    $.get(_url, function (html) {
+                        layer.close(load);
+                        layer.open({
+                            type: 1,
+                            area: ['70%', '70%'],
+                            title: "配置用户角色",
+                            content: html,
+                            cancel: function () {
+                                table.draw(false);
+                            }
+                        });
+                    });
+                });
+                $(row).find('.btnDelete').click(function (e) {
+                    e.preventDefault();
+                    var _url = $(this).data('url');
+                    events.del(_url, row);
+                });
+
+            }
+        });
+        $('#formSearch').submit(function (e) {
+            e.preventDefault();
+            table.draw();
+        });
+
+        $('.btnAdd').click(function (e) {
+            e.preventDefault();
+            var _url = $(this).data('url');
+            events.edit(_url);
+        });
+
+        var events = {
+            edit: function (_url) {
+                var load = layer.load(2);
+                $.get(_url, function (html) {
+                    layer.close(load);
+                    layer.open({
+                        type: 1,
+                        area: ['70%', '80%'],
+                        title: "配置分部",
+                        content: html,
+                        cancel: function () {
+                            table.draw(false);
+                        }
+                    });
+                });
+            },
+            del: function (_url, row) {
+                layer.confirm('删除用户将无法恢复，您确定要删除？', function () {
+                    var index = layer.load(2);
+                    $.get(_url, function (res) {
+                        layer.close(index);
+                        if (res.Code === 0) {
+                            layer.alert(res.Message, { icon: 1 }, function () {
+                                row.remove();
+                                layer.closeAll();
+                            });
+                        } else {
+                            layer.msg(res.Message, { icon: 2 });
+                        }
+                    });
+                });
+            }
+        }
+
+    })
+</script>

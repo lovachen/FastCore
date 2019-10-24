@@ -118,3 +118,126 @@
 2019-10-24 09:11:19.9683 Info Found 41 configuration items
 2019-10-24 09:11:20.0006 Info Configuration initialized.
 2019-10-24 09:11:20.0006 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 09:35:40.7831 Info Message Template Auto Format enabled
+2019-10-24 09:35:40.8100 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 09:35:40.8655 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 09:35:40.8997 Info Found 41 configuration items
+2019-10-24 09:35:40.9408 Info Configuration initialized.
+2019-10-24 09:35:40.9408 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 09:48:01.6402 Info Message Template Auto Format enabled
+2019-10-24 09:48:01.6573 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 09:48:01.6951 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 09:48:01.7167 Info Found 41 configuration items
+2019-10-24 09:48:01.7505 Info Configuration initialized.
+2019-10-24 09:48:01.7505 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 09:51:36.3243 Info Message Template Auto Format enabled
+2019-10-24 09:51:36.3417 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 09:51:36.3793 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 09:51:36.4011 Info Found 41 configuration items
+2019-10-24 09:51:36.4330 Info Configuration initialized.
+2019-10-24 09:51:36.4330 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 09:53:19.4767 Error DatabaseTarget(Name=db): Error when writing to database. Exception: System.Data.SqlClient.SqlException (0x80131904): 将截断字符串或二进制数据。
+语句已终止。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite, String method)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.WriteEventToDatabase(LogEventInfo logEvent, String connectionString)
+   at NLog.Targets.DatabaseTarget.Write(LogEventInfo logEvent)
+ClientConnectionId:e54590c5-8570-4837-8f8c-309430925cee
+Error Number:8152,State:13,Class:16
+2019-10-24 09:53:51.3175 Info Message Template Auto Format enabled
+2019-10-24 09:53:51.3175 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 09:53:51.3753 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 09:53:51.3970 Info Found 41 configuration items
+2019-10-24 09:53:51.4290 Info Configuration initialized.
+2019-10-24 09:53:51.4290 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 09:54:02.2961 Error DatabaseTarget(Name=db): Error when writing to database. Exception: System.Data.SqlClient.SqlException (0x80131904): 将截断字符串或二进制数据。
+语句已终止。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite, String method)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.WriteEventToDatabase(LogEventInfo logEvent, String connectionString)
+   at NLog.Targets.DatabaseTarget.Write(LogEventInfo logEvent)
+ClientConnectionId:12db50c8-d503-43e4-bc9f-f1466f35eeb9
+Error Number:8152,State:13,Class:16
+2019-10-24 09:54:45.3764 Info Message Template Auto Format enabled
+2019-10-24 09:54:45.3926 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 09:54:45.4303 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 09:54:45.4524 Info Found 41 configuration items
+2019-10-24 09:54:45.4881 Info Configuration initialized.
+2019-10-24 09:54:45.4881 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 09:54:56.7360 Error DatabaseTarget(Name=db): Error when writing to database. Exception: System.Data.SqlClient.SqlException (0x80131904): 将截断字符串或二进制数据。
+语句已终止。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite, String method)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.WriteEventToDatabase(LogEventInfo logEvent, String connectionString)
+   at NLog.Targets.DatabaseTarget.Write(LogEventInfo logEvent)
+ClientConnectionId:f4d22769-b64f-4814-9003-eabc32d7b77f
+Error Number:8152,State:13,Class:16
+2019-10-24 09:55:33.7689 Info Message Template Auto Format enabled
+2019-10-24 09:55:33.7855 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 09:55:33.8270 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 09:55:33.8535 Info Found 41 configuration items
+2019-10-24 09:55:33.8852 Info Configuration initialized.
+2019-10-24 09:55:33.8852 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 10:00:56.4573 Info Message Template Auto Format enabled
+2019-10-24 10:00:56.4780 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 10:00:56.5205 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 10:00:56.5409 Info Found 41 configuration items
+2019-10-24 10:00:56.5742 Info Configuration initialized.
+2019-10-24 10:00:56.5742 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 10:02:40.1272 Info Message Template Auto Format enabled
+2019-10-24 10:02:40.1476 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 10:02:40.1900 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 10:02:40.2178 Info Found 41 configuration items
+2019-10-24 10:02:40.2489 Info Configuration initialized.
+2019-10-24 10:02:40.2489 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 10:05:33.3592 Info Message Template Auto Format enabled
+2019-10-24 10:05:33.3782 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 10:05:33.4203 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 10:05:33.4419 Info Found 41 configuration items
+2019-10-24 10:05:33.4781 Info Configuration initialized.
+2019-10-24 10:05:33.4781 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 10:06:30.2645 Info Message Template Auto Format enabled
+2019-10-24 10:06:30.2823 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 10:06:30.3214 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 10:06:30.3423 Info Found 41 configuration items
+2019-10-24 10:06:30.3734 Info Configuration initialized.
+2019-10-24 10:06:30.3734 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 10:07:32.6507 Info Message Template Auto Format enabled
+2019-10-24 10:07:32.6706 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 10:07:32.7172 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 10:07:32.7401 Info Found 41 configuration items
+2019-10-24 10:07:32.7751 Info Configuration initialized.
+2019-10-24 10:07:32.7751 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 10:17:34.8155 Info Message Template Auto Format enabled
+2019-10-24 10:17:34.8355 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 10:17:34.8771 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 10:17:34.8997 Info Found 41 configuration items
+2019-10-24 10:17:34.9325 Info Configuration initialized.
+2019-10-24 10:17:34.9325 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 11:07:36.9666 Info Message Template Auto Format enabled
+2019-10-24 11:07:36.9879 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 11:07:37.0465 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 11:07:37.0760 Info Found 41 configuration items
+2019-10-24 11:07:37.1155 Info Configuration initialized.
+2019-10-24 11:07:37.1155 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.

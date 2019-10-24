@@ -1,6 +1,9 @@
-﻿@{ 
-    Layout = null;
+﻿@{
+    Layout = null; 
+
 }
+@model ViewLoginModel
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,34 +16,34 @@
     <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Font Awesome -->
     <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/lte/css/AdminLTE.min.css" rel="stylesheet" /> 
+    <link href="~/lte/css/AdminLTE.min.css" rel="stylesheet" />
     <script src="~/jquery/jquery-2.2.4.min.js"></script>
 </head>
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b>Admin</b>LTE</a>
+            <a href="/"><b>@SiteContext.Settings.SiteName</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">1111</p>
 
-            <form action="../../index2.html" method="post">
+            <form asp-route="adminLogin" method="post" onsubmit="return false;">
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" placeholder="Email">
+                    <input type="text" asp-for="Account" class="form-control" placeholder="请输入您的账号">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" asp-for="Password" class="form-control" placeholder="请输入您的登录密码">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div> 
+                </div>
                 <div class="row">
                     <div class="col-xs-8">
-                        
+
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">登 录</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -49,7 +52,7 @@
             <div class="social-auth-links text-center">
                 <p>- OR -</p>
                 <p id="message" class="text-danger">111</p>
-            </div> 
+            </div>
 
         </div>
         <!-- /.login-box-body -->
@@ -57,8 +60,53 @@
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/js/jquery.md5.js"></script>
     <script src="~/js/jquery.form.js"></script>
+    <script src="~/layer/layer.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script>
+        $(function () {
+            $('form').submit(function (e) {
+                if ($(this).valid()) {
+                    var btn = $(this).find('[type="submit"]').addClass('disabled').attr('disabled', 'disabled');
+                    var account = $(this).find('#Account').val();
+                    var password = $(this).find('#Password').val();
+                    var _vertoken = $(this).find('[name="__RequestVerificationToken"]').val();
+                    var _url = this.action;
+                    $.ajax({
+                        url: '@Url.RouteUrl("getSalt")',
+                        data: { "Account": account },
+                        success: (res) => {
+                            console.log(res);
+                            if (res.code === 0) {
+                                 password = $.md5($.md5(password + res.result.salt) + res.result.r);
+                                $.ajax({
+                                    url: _url,
+                                    type: 'post',
+                                    dataType: 'json',
+                                    data: { "Account": account, "Password": password, "__RequestVerificationToken": _vertoken },
+                                    success: function (res) {
+                                        if (res.code === 0) {
+                                            window.location.href = res.result.url;
+                                        } else {
+                                            layer.msg(res.message, { icon: 2 });
+                                        }
+                                    },
+                                    complete: (res) => { 
+                                        btn.removeAttr('disabled').removeClass('disabled');
+                                    }
+                                });
+                            } else {
+                                layer.msg(res.Message, { icon: 2 });
+                            }
+                        },
+                        error: (res) => {
+                            btn.removeAttr('disabled').removeClass('disabled');
+                        }
+                    });
 
+                }
+            });
+        });
     </script>
 </body>
 </html>
