@@ -100,3 +100,21 @@
 2019-10-23 17:59:00.5218 Info Found 41 configuration items
 2019-10-23 17:59:00.5593 Info Configuration initialized.
 2019-10-23 17:59:00.5593 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 08:40:19.2485 Info Message Template Auto Format enabled
+2019-10-24 08:40:19.2694 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 08:40:19.3187 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 08:40:19.3428 Info Found 41 configuration items
+2019-10-24 08:40:19.3986 Info Configuration initialized.
+2019-10-24 08:40:19.3986 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 09:07:25.9949 Info Message Template Auto Format enabled
+2019-10-24 09:07:26.0189 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 09:07:26.0816 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 09:07:26.1170 Info Found 41 configuration items
+2019-10-24 09:07:26.1552 Info Configuration initialized.
+2019-10-24 09:07:26.1552 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-24 09:11:19.8925 Info Message Template Auto Format enabled
+2019-10-24 09:11:19.9095 Info Loading assembly: NLog.Web.AspNetCore
+2019-10-24 09:11:19.9470 Info Adding target DatabaseTarget(Name=db)
+2019-10-24 09:11:19.9683 Info Found 41 configuration items
+2019-10-24 09:11:20.0006 Info Configuration initialized.
+2019-10-24 09:11:20.0006 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.

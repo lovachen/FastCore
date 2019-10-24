@@ -77,8 +77,8 @@ namespace Fast.Framework
             services.AddScoped<SysUserAuthentication>();
             services.AddScoped<WorkContext>();
 
-            //启用redis或者内存缓存,默认使用内存缓存
-            services.AddRedisOrMemoryCache(Configuration);
+            //使用内存缓存
+            services.AddMemoryCache(Configuration);
             //
             //var cfg = new MapperConfiguration(cfg=>cfg.AddProfile<MappingProfile>());
             // cfg.AssertConfigurationIsValid();

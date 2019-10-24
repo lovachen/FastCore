@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\cts.web.core\cts.web.core.csproj" />
     <ProjectReference Include="..\Fast.Core\Fast.Core.csproj" />
     <ProjectReference Include="..\Fast.Entities\Fast.Entities.csproj" />
     <ProjectReference Include="..\Fast.Mapping\Fast.Mapping.csproj" />

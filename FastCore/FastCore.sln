@@ -11,17 +11,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{CD92C4F2-DBD2-4F7B-9E86-7C3B655383F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fast.Web", "Fast.Web\Fast.Web.csproj", "{893FC30F-EDF5-4C5E-B833-49C280D28ADD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Web", "Fast.Web\Fast.Web.csproj", "{893FC30F-EDF5-4C5E-B833-49C280D28ADD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fast.Framework", "Fast.Framework\Fast.Framework.csproj", "{2AB300B8-A929-4104-9846-D6B6DAA9AA6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Framework", "Fast.Framework\Fast.Framework.csproj", "{2AB300B8-A929-4104-9846-D6B6DAA9AA6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fast.Services", "Fast.Services\Fast.Services.csproj", "{014A9A2B-2607-4F83-B9F2-FE1D1264B30C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Services", "Fast.Services\Fast.Services.csproj", "{014A9A2B-2607-4F83-B9F2-FE1D1264B30C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fast.Entities", "Fast.Entities\Fast.Entities.csproj", "{4ACA5573-494C-44B9-B988-51CF0DD062D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Entities", "Fast.Entities\Fast.Entities.csproj", "{4ACA5573-494C-44B9-B988-51CF0DD062D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fast.Mapping", "Fast.Mapping\Fast.Mapping.csproj", "{A832F384-B7C8-443D-BABA-DC65A6028548}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Mapping", "Fast.Mapping\Fast.Mapping.csproj", "{A832F384-B7C8-443D-BABA-DC65A6028548}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fast.Core", "Fast.Core\Fast.Core.csproj", "{F5F8DE40-576E-4224-A9B3-D70F4A6C25D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Core", "Fast.Core\Fast.Core.csproj", "{F5F8DE40-576E-4224-A9B3-D70F4A6C25D9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cts.web.core", "cts.web.core\cts.web.core.csproj", "{F683CF6F-FD31-4B55-8D99-4F028CF249B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{F5F8DE40-576E-4224-A9B3-D70F4A6C25D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5F8DE40-576E-4224-A9B3-D70F4A6C25D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5F8DE40-576E-4224-A9B3-D70F4A6C25D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F683CF6F-FD31-4B55-8D99-4F028CF249B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F683CF6F-FD31-4B55-8D99-4F028CF249B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F683CF6F-FD31-4B55-8D99-4F028CF249B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F683CF6F-FD31-4B55-8D99-4F028CF249B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{4ACA5573-494C-44B9-B988-51CF0DD062D5} = {361D62A7-27D5-4014-A402-A492CDAEACDD}
 		{A832F384-B7C8-443D-BABA-DC65A6028548} = {361D62A7-27D5-4014-A402-A492CDAEACDD}
 		{F5F8DE40-576E-4224-A9B3-D70F4A6C25D9} = {67399E6A-E1D1-4487-8CF4-06663F3106CF}
+		{F683CF6F-FD31-4B55-8D99-4F028CF249B3} = {67399E6A-E1D1-4487-8CF4-06663F3106CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {91CC32C9-D5E8-4377-A2A5-1F112847A2EE}

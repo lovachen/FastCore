@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="cts.web.core" Version="2.0.0" />
+    <ProjectReference Include="..\cts.web.core\cts.web.core.csproj" />
   </ItemGroup>
 
 </Project>
