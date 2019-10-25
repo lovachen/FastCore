@@ -4,7 +4,7 @@ using cts.web.core.MediaItem;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc; 
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using cts.web.core.Model;
@@ -24,6 +24,7 @@ using Fast.Services;
 using Quartz;
 using Quartz.Spi;
 using Quartz.Impl;
+using System.Text.Json;
 
 namespace Fast.Framework
 {
@@ -47,6 +48,7 @@ namespace Fast.Framework
         public override void Initialize(IServiceCollection services)
         {
             services.AddControllersWithViews()
+                .AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null)
                 .AddRazorRuntimeCompilation(); //页面动态编译，发布时应该移除
 
             //services.AddDbContextPool<ABDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")),100);
@@ -90,7 +92,7 @@ namespace Fast.Framework
 
             //API版本
             services.AddApiVersioning(opts =>
-            { 
+            {
                 opts.AssumeDefaultVersionWhenUnspecified = true;
             });
 

@@ -83,12 +83,12 @@
                 var loadIndex = layer.load(2);
                 form.ajaxSubmit(function (res) {
                     layer.close(loadIndex);
-                    if (res.code === 0) {
-                        layer.alert(res.message, { icon: 1 }, function () {
+                    if (res.Code === 0) {
+                        layer.alert(res.Message, { icon: 1 }, function () {
                             window.location.reload();
                         });
                     } else {
-                        layer.msg(res.message, { icon: 2 });
+                        layer.msg(res.Message, { icon: 2 });
                     }
                 });
             }

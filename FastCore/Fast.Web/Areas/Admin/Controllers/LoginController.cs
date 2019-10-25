@@ -13,9 +13,9 @@ namespace Fast.Web.Areas.Admin.Controllers
 
     /// <summary>
     /// 
-    /// </summary>
+    /// </summary> 
     [Route("admin/login")]
-    public class LoginController : WebBaseController
+    public class LoginController : AreaBaseController
     {
         private SysUserService _sysUserService;
         private SysUserAuthentication _sysUserAuthentication;

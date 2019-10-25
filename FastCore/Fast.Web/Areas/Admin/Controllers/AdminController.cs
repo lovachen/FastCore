@@ -14,11 +14,10 @@ namespace Fast.Web.Areas.Admin.Controllers
 {
     /// <summary>
     /// 
-    /// </summary>
-    [Area("Admin")]
+    /// </summary> 
     [Route("admin/[controller]")]
     [SysUserAuth]
-    public abstract class AdminController:WebBaseController
+    public abstract class AdminController: AreaBaseController
     {
         /// <summary>
         /// 
@@ -31,20 +30,7 @@ namespace Fast.Web.Areas.Admin.Controllers
             var workContext = context.HttpContext.RequestServices.GetService<WorkContext>();
             this.UserId = workContext.GetUserId();
         }
-         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="res"></param>
-        /// <returns></returns>
-        protected IActionResult Json((bool Status, string Message) res)
-        {
-            AjaxData.Code = res.Status ? 0 : 2001;
-            AjaxData.Message = res.Message ?? "操作结束";
-            return Json(AjaxData);
-        } 
-
-
+          
 
     }
 }

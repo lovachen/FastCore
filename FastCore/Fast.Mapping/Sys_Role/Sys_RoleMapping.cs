@@ -29,5 +29,21 @@ namespace Fast.Mapping
         /// </summary>
         [StringLength(150)]
         public string Description { get; set; }
+
+
+
+        #region
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<Sys_UserMapping> SysUsers { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<Sys_PermissionMapping> SysPermissions { get; set; }
+
+        #endregion
     }
 }

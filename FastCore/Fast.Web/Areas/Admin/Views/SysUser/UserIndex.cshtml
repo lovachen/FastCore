@@ -3,7 +3,6 @@
     ViewData["Title"] = "系统用户";
     var canEdit = WorkContext.AuthorityCheck("userEdit");
     var canSetRole = WorkContext.AuthorityCheck("userRoles");
-    var canSetAttr = WorkContext.AuthorityCheck("userAttrs");
     var canDel = WorkContext.AuthorityCheck("userDelete");
 }
 <style>
@@ -54,20 +53,20 @@
                 <thead>
                     <tr>
                         <th width="10%">姓名</th>
-                        <th width="20%">角色</th>
-                        <th width="20%">分部</th>
-                        <th width="10%">启用</th>
-                        <th width="10%">登陆锁</th>
+                        <th width="10%">账号</th>
+                        <th width="20%">角色</th> 
+                        <th width="10%">电话</th>
+                        <th width="20%">活动时间</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th width="10%">姓名</th>
-                        <th width="20%">角色</th>
-                        <th width="20%">分部</th>
-                        <th width="10%">启用</th>
-                        <th width="10%">登陆锁</th>
+                        <th width="10%">账号</th>
+                        <th width="20%">角色</th> 
+                        <th width="10%">电话</th>
+                        <th width="20%">活动时间</th>
                         <th>操作</th>
                     </tr>
                 </tfoot>
@@ -99,7 +98,8 @@
             },
             order: [0, 'asc'],
             columns: [
-                { data: 'Name' },
+                { data: 'Name' }, 
+                { data:'Account'},
                 {
                     data: null,
                     "orderable": false,
@@ -112,31 +112,14 @@
                         return '';
                     }
                 },
+                
                 {
-                    data: null,
-                    "orderable": false,
-                    'render': function (data, type, row) {
-                        if (row.EstateAttributes != null && Array.isArray(row.EstateAttributes) && row.EstateAttributes.length > 0) {
-                            return row.EstateAttributes.map(item => {
-                                return '<span class="label label-lg label-success">' + item.Name + '</span>';
-                            }).join(' ');
-                        }
-                        return '';
-                    }
+                    data: 'MobilePhone',
+                    "orderable": false, 
                 },
                 {
-                    data: null,
-                    "orderable": false,
-                    'render': function (data, type, row) {
-                        return row.Enabled ? '是' :'<span class="label label-danger">禁用</span>';
-                    }
-                },
-                {
-                    data: null,
-                    "orderable": false,
-                    'render': function (data, type, row) {
-                        return row.LoginLock ? '<span class="label label-warning">是</span>' :'正常';
-                    }
+                    data: 'LastActivityTimeForamt',
+                    "orderable": false, 
                 },
             ],
             columnDefs: [
@@ -147,9 +130,6 @@
                 "render": function (data, type, row) {
                     var id = row.Id;
                     var html = "<button data-url='@Url.RouteUrl("userDetails")?id=" + id + "' class='btn btn-link btn-xs btnDetails'><i class='fa fa-search-plus'></i> 查看</button>";
-                    if (@Json.Serialize(canSetAttr)) {
-                        html += "<button data-url='@Url.RouteUrl("userAttrs")?id=" + id + "' class='btn btn-link btn-xs btnEdit' ><i class='fa fa-pencil'></i> 配置分部</button>";
-                    }
                     if (@Json.Serialize(canSetRole)) {
                         html += "<button data-url='@Url.RouteUrl("userRoles")?id=" + id + "' class='btn btn-link btn-xs btnSetRoles'><i class='fa fa-gear'></i> 配置角色</button>";
                     }

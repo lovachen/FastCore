@@ -1,0 +1,119 @@
+﻿@{
+    ViewData["Title"] = "用户操作日志";
+    bool canDtl = WorkContext.AuthorityCheck("activityLogDetails");
+}
+
+<style>
+    .table-responsive-md {
+        min-width: 1000px;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        @ViewData["Title"]
+        <small>系统后台用户操作日志记录</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/main"><i class="fa fa-dashboard"></i> 主界面</a></li>
+        <li class="active">@ViewData["Title"]</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="box box-info">
+        <div class="box-body">
+            <form class="form-inline" onsubmit="return false" id="formSearch">
+                <div class="form-group">
+                    <label for="q">关键字</label>
+                    <input type="text" class="form-control" id="q" name="q" placeholder="姓名">
+                </div>
+                <button type="submit" class="btn bg-purple"><i class="fa fa-search"></i> 查询</button>
+            </form>
+        </div>
+    </div>
+    <div class="box box-solid">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="table_activitylog" class="table table-bordered table-striped table-responsive-md">
+                <thead>
+                    <tr>
+                        <th width="25%">业务说明</th>
+                        <th width="25%">表名</th>
+                        <th width="10%">类型</th>
+                        <th width="10%">姓名</th>
+                        <th width="20%">时间</th>
+                        <th width="10%">详情</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+
+</section>
+<script>
+
+
+    $(function () {
+        // "orderable": false
+        var table = $('#table_activitylog').DataTable({
+            language: { url: '/dataTables/chinese.json' },
+            serverSide: true,
+            processing: true,
+            searching: false,
+            scrollX: true,
+            ajax: {
+                url: '@Url.RouteUrl("activityLogData")',
+                data: function (d) {
+                    d.q = $('#q').val();
+                }
+            },
+            order:[[4,'desc']],
+            columns: [
+                { data: "Comment", "orderable": false },
+                { data: "EntityName" },
+                {data: "Method" },
+                { data: "UserName" },
+                {data: "CreationTimeForamt" }
+            ],
+            columnDefs: [
+                {
+                    "targets": 5, 
+                    "data": null,
+                    "render": function (data, type, row) {
+                        var id = row.Id;
+                        if (@Json.Serialize(canDtl)) {
+                            var html = "<button data-url='@Url.RouteUrl("activityLogDetails")?id=" + id + "' class='btn btn-link btn-xs btnDetails'><i class='fa fa-search-plus'></i> 查看</button>"
+                            return html;
+                        } else {
+                            return '';
+                        }
+                    }
+                }
+            ],
+            rowCallback: function (row, data) {
+                $(row).find('.btnDetails').click(function (e) {
+                    var _url = $(this).data('url');
+                    var load = layer.load(2);
+                    $.get(_url, function (html) {
+                        layer.close(load);
+                        layer.open({
+                            type: 1,
+                            maxmin: true,
+                            area: ['80%', '80%'],
+                            title: "预览操作日志详情",
+                            content: html
+                        });
+                    });
+                });
+            }
+        });
+        $('#formSearch').submit(function (e) {
+            e.preventDefault();
+            table.draw();;
+        });
+
+
+
+    })
+</script>

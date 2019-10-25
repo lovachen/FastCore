@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using cts.web.core.Librs;
 using Fast.Framework.Filters;
 using Fast.Mapping;
 using Fast.Services;
@@ -17,6 +19,8 @@ namespace Fast.Web.Areas.Admin.Controllers
         private SysUserLoginService _sysUserLoginLogService;
         private ActivityLogService _activityLogService;
         private SysUserJwtService _sysUserJwtService;
+        private IMapper _mapper;
+
         /// <summary>
         /// 
         /// </summary>
@@ -24,13 +28,15 @@ namespace Fast.Web.Areas.Admin.Controllers
             SysRoleService sysRoleService,
             SysUserLoginService sysUserLoginLogService,
             ActivityLogService activityLogService,
-            SysUserJwtService sysUserJwtService)
+            SysUserJwtService sysUserJwtService,
+            IMapper mapper)
         {
             _sysUserJwtService = sysUserJwtService;
             _sysUserLoginLogService = sysUserLoginLogService;
             _sysRoleService = sysRoleService;
             _sysUserService = sysUserService;
             _activityLogService = activityLogService;
+            _mapper = mapper;
         }
 
 
@@ -141,6 +147,44 @@ namespace Fast.Web.Areas.Admin.Controllers
                 model = new Sys_UserMapping();
             return PartialView(model);
         }
+
+        [HttpPost("edit")]
+        public IActionResult UserEdit(Sys_UserMapping SysUser,List<Guid> RoleIds)
+        {
+            if (!ModelState.IsValid)
+                return NotValid();
+            (bool Status, string Message) res;
+            var item = _mapper.Map<Entities.Sys_User>(SysUser);
+
+            if (SysUser.Id != Guid.Empty)
+            {
+                res = _sysUserService.UpdateUser(SysUser, UserId);
+            }
+            else
+            {
+                item.Account = item.Account.TrimSpace();
+                item.Id = CombGuid.NewGuid();
+                item.CreationTime = DateTime.Now;
+                item.Creator = UserId;
+                item.Salt = EncryptorHelper.CreateSaltKey();
+                item.Password = (EncryptorHelper.GetMD5(item.Account + item.Salt));
+                res = _sysUserService.AddUser(item);
+            }
+            AjaxData.Message = res.Message;
+            AjaxData.Code = res.Status ? 0 : 2001;
+            if (res.Status)
+            {
+                _sysRoleService.SetUserRoles(item.Id, RoleIds, UserId);
+            }
+            return Json(AjaxData);
+        }
+
+
+
+
+
+
+
 
 
 

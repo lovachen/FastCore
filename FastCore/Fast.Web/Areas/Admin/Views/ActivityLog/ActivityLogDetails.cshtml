@@ -1,0 +1,50 @@
+﻿@model Sys_ActivityLogMapping
+@using Newtonsoft.Json.Linq;
+
+@{ 
+    var OldObject = ViewBag.OldObject as JObject;
+    var NewObject = ViewBag.NewObject as JObject;
+}
+<div class="space-10"></div>
+<div class="col-sm-12">
+
+    <dl class="dl-horizontal">
+        <dt>表名</dt>
+        <dd>@Model.EntityName</dd>
+        <dt>操作时间</dt>
+        <dd>@Model.CreationTimeForamt</dd>
+        <dt>类型</dt>
+        <dd><span class="label label-success">@Model.Method</span></dd>
+        <dt>操作人</dt>
+        <dd>@Model.UserName</dd>
+        <dt>结果对比</dt>
+        <dd>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>字段名</th>
+                        <th>旧值</th>
+                        <th>新值</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (OldObject != null || NewObject != null)
+                    {
+                        var obj = OldObject ?? NewObject;
+                        foreach (JToken item in obj.Children())
+                        {
+                            <tr class="@(OldObject!=null && NewObject!=null && OldObject[item.Path]?.ToString() != NewObject[item.Path]?.ToString() ? "text-danger":"")">
+                                <td>@item.Path</td>
+                                <td>@(OldObject != null ? OldObject[item.Path] : "")</td>
+                                <td>@(NewObject != null ? NewObject[item.Path] : "")</td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+
+
+</div>
