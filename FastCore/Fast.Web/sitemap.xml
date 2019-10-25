@@ -41,17 +41,12 @@
     <siteMapNode Name="错误日志" UID="SYSMGR.NLOG" IsMenu="1" Action="NLogIndex" Controller="NLog" RouteName="nLogIndex" Target="0">
       <siteMapNode Name="查看详情" UID="SYSMGR.NLOG.DTL" Action="NLogDetails" Controller="NLog" RouteName="nLogDetails" Target="0"></siteMapNode>
     </siteMapNode>
-    <siteMapNode Name="意见反馈" UID="SYSMGR.FEEDBACK" IsMenu="1" Action="FeedbackIndex" Controller="Feedback" RouteName="feedbackIndex" Target="0">
-      <!--<siteMapNode Name="查看详情" UID="SYSMGR.FEEDBACK.DTL" Action="NLogDetails" Controller="NLog" RouteName="nLogDetails" Target="0"></siteMapNode>-->
-    </siteMapNode>
  
     <siteMapNode Name="任务调度" UID="SYSMGR.QUARZT" IsMenu="1" Action="QuarztIndex" Controller="Quarzt" RouteName="quarztIndex" Target="0">
       <siteMapNode Name="启动任务" UID="SYSMGR.QUARZT.START" Action="StartQuarzt" Controller="Quarzt" RouteName="startQuarzt" Target="0"></siteMapNode>
       <siteMapNode Name="暂停任务" UID="SYSMGR.QUARZT.STOP" Action="StopQuarzt" Controller="Quarzt" RouteName="stopQuarzt" Target="0"></siteMapNode>
     </siteMapNode>
-    <siteMapNode Name="短信验证码" UID="SYSMGR.SMSCAPTCHA" IsMenu="1" Action="SmsCaptchaIndex" Controller="SmsCaptcha" RouteName="smsCaptchaIndex" Target="0">
-      <!--<siteMapNode Name="查看详情" UID="SYSMGR.FEEDBACK.DTL" Action="NLogDetails" Controller="NLog" RouteName="nLogDetails" Target="0"></siteMapNode>-->
-    </siteMapNode>
+ 
 
   </siteMapNode>
 

@@ -1,17 +1,17 @@
-﻿@{
-    ViewData["Title"] = "用户操作日志";
-    bool canDtl = WorkContext.AuthorityCheck("activityLogDetails");
+﻿
+@{
+    ViewData["Title"] = "系统错误日志";
 }
 
 <style>
-    .table-responsive-md {
+    .table {
         min-width: 1000px;
     }
 </style>
 <section class="content-header">
     <h1>
         @ViewData["Title"]
-        <small>系统后台用户操作日志记录</small>
+        <small>系统错误日志记录分析</small>
     </h1>
     <ol class="breadcrumb">
         <li><a asp-route="mainIndex"><i class="fa fa-dashboard"></i> 主界面</a></li>
@@ -24,8 +24,10 @@
         <div class="box-body">
             <form class="form-inline" onsubmit="return false" id="formSearch">
                 <div class="form-group">
-                    <label for="q">关键字</label>
-                    <input type="text" class="form-control" id="q" name="q" placeholder="姓名">
+                    <label for="q">等级</label>
+                    <select id="level" class="form-control" name="level">
+                        <option value="">不限</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn bg-purple"><i class="fa fa-search"></i> 查询</button>
             </form>
@@ -34,14 +36,13 @@
     <div class="box box-solid">
         <!-- /.box-header -->
         <div class="box-body">
-            <table id="table_activitylog" class="table table-bordered table-striped table-responsive-md">
+            <table id="table_log" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th width="25%">业务说明</th>
-                        <th width="25%">表名</th>
-                        <th width="10%">类型</th>
-                        <th width="10%">姓名</th>
-                        <th width="20%">时间</th>
+                        <th width="10%">等级</th>
+                        <th width="25%">时间</th>
+                        <th width="30%">说明</th>
+                        <th width="25%">来源类</th>
                         <th width="10%">详情</th>
                     </tr>
                 </thead>
@@ -56,38 +57,34 @@
 
     $(function () {
         // "orderable": false
-        var table = $('#table_activitylog').DataTable({
+        var table = $('#table_log').DataTable({
             language: { url: '/dataTables/chinese.json' },
             serverSide: true,
             processing: true,
             searching: false,
             scrollX: true,
             ajax: {
-                url: '@Url.RouteUrl("activityLogData")',
+                url: '@Url.RouteUrl("nLogData")',
                 data: function (d) {
-                    d.q = $('#q').val();
+                    d.q = $('#level').val();
                 }
             },
-            order:[[4,'desc']],
+            order:[1,'desc'],
             columns: [
-                { data: "Comment", "orderable": false },
-                { data: "EntityName" },
-                {data: "Method" },
-                { data: "UserName" },
-                {data: "CreationTimeForamt" }
+                { "width": '10%', data: "Level", "orderable": false },
+                { "width": '25%', data: "LoggedFormat"},
+                { "width": '30%', data: "Message", "orderable": false  },
+                { "width": '25%', data: "Logger", "orderable": false }
             ],
             columnDefs: [
                 {
-                    "targets": 5, 
+                    "width": "10%",
+                    "targets": 4,
                     "data": null,
                     "render": function (data, type, row) {
                         var id = row.Id;
-                        if (@Json.Serialize(canDtl)) {
-                            var html = "<button data-url='@Url.RouteUrl("activityLogDetails")?id=" + id + "' class='btn btn-link btn-xs btnDetails'><i class='fa fa-search-plus'></i> 查看</button>"
-                            return html;
-                        } else {
-                            return '';
-                        }
+                        var html = "<button data-url='@Url.RouteUrl("nLogDetails")?id=" + id + "' class='btn btn-link btn-xs btnDetails'><i class='fa fa-search-plus'></i> 查看</button>"
+                        return html;
                     }
                 }
             ],
@@ -101,7 +98,7 @@
                             type: 1,
                             maxmin: true,
                             area: ['80%', '80%'],
-                            title: "预览操作日志详情",
+                            title: "预览日志详情",
                             content: html
                         });
                     });

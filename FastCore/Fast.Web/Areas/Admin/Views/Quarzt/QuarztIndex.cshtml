@@ -1,0 +1,116 @@
+﻿@model List<QuarztScheduleMapping>
+@{
+    ViewData["Title"] = "任务调度";
+
+    var canStart = WorkContext.AuthorityCheck("startQuarzt");
+    var canStop = WorkContext.AuthorityCheck("stopQuarzt");
+
+}
+
+<section class="content-header">
+    <h1>
+        @ViewData["Title"]
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/main"><i class="fa fa-dashboard"></i> 主界面</a></li>
+        <li class="active">@ViewData["Title"]</li>
+    </ol>
+</section>
+<section class="content">
+
+    <div class="box">
+        <div class="box-body">
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>任务组</td>
+                        <td>任务名</td>
+                        <td>CRON表达式</td>
+                        <td>开始时间</td>
+                        <td>结束时间</td>
+                        <td>执行时间</td>
+                        <td>下次运行</td>
+                        <td>状态</td>
+                        <td>TaskDescription</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.JobGroup</td>
+                                <td>@item.JobName</td>
+                                <td>@item.CronExpress</td>
+                                <td>@item.StarRunTime</td>
+                                <td>@item.EndRunTime</td>
+                                <td>@item.JobRunTime</td>
+                                <td>@item.NextRunTime</td>
+                                <td>
+                                    @switch (item.RunStatus)
+                                    {
+                                        case (int)JobStatus.初始值:
+                                    <small class="label label-default">初始值</small>
+                                            break;
+                                        case (int)JobStatus.执行任务中:
+                                            <small class="label label-success"><i class="fa fa-clock-o"></i>执行任务中</small>
+                                            break;
+                                        case (int)JobStatus.暂停任务中:
+                                            <small class="label label-danger">暂停任务中</small>
+                                            break;
+                                    }
+                                </td>
+                                <td>@item.TaskDescription</td>
+                                <td>
+                                    @if (canStart)
+                                    {
+                                        if (item.RunStatus != (int)JobStatus.执行任务中)
+                                        {
+                                        <button data-url="@Url.RouteUrl("startQuarzt", new { id = item.Id })" class="btn btn-link btn-xs btnStart">开启任务</button>
+                                        }
+                                    }
+                                    @if (canStop)
+                                    {
+                                        if (item.RunStatus == (int)JobStatus.执行任务中)
+                                        {
+                                        <button data-url="@Url.RouteUrl("stopQuarzt", new { id = item.Id })" class="btn btn-link btn-xs btnStop">暂停任务</button>
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</section>
+<script>
+    $(function () {
+
+        $('.btnStart,.btnStop').click(function (e) {
+            e.preventDefault();
+            var _url = $(this).data('url'); 
+            layer.confirm('您确定要执行此操作？', function () {
+                var index = layer.load(2);
+                $.get(_url, function (res) {
+                    layer.close(index);
+                    if (res.Code === 0) {
+                        layer.alert(res.Message, { icon: 1 }, function () {
+                            window.location.reload();
+                        });
+                    } else {
+                        layer.msg(res.Message, { icon: 2 });
+                    }
+                });
+            });
+        });
+
+
+    });
+</script>
