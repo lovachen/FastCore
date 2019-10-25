@@ -1,12 +1,2 @@
-2019-10-25 14:37:05.2236 Info Message Template Auto Format enabled
-2019-10-25 14:37:05.2536 Info Loading assembly: NLog.Web.AspNetCore
-2019-10-25 14:37:05.3193 Info Adding target DatabaseTarget(Name=db)
-2019-10-25 14:37:05.3515 Info Found 41 configuration items
-2019-10-25 14:37:05.3980 Info Configuration initialized.
-2019-10-25 14:37:05.3980 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
-2019-10-25 14:41:10.0489 Info Message Template Auto Format enabled
-2019-10-25 14:41:10.0702 Info Loading assembly: NLog.Web.AspNetCore
-2019-10-25 14:41:10.1123 Info Adding target DatabaseTarget(Name=db)
-2019-10-25 14:41:10.1361 Info Found 41 configuration items
-2019-10-25 14:41:10.1723 Info Configuration initialized.
-2019-10-25 14:41:10.1723 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.7.10445. Product version: 4.6.7.
+2019-10-25 14:54:16.5120 Warn Skipping unknown 'NLog' child node: target
+2019-10-25 14:54:16.5779 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'allfile' not found for logging rule: *.
